@@ -216,9 +216,11 @@ def mix_datasets(
             try:
                 # Try first if dataset on a Hub repo
                 dataset = load_dataset(ds, ds_config, split=split)
-            except DatasetGenerationError:
+            except Exception as e:
                 # If not, check local dataset
                 dataset = load_from_disk(os.path.join(ds, split))
+            except Exception as e:
+                dataset = load_dataset('json', data_files=ds)
 
             # Remove redundant columns to avoid schema conflicts on load
             dataset = dataset.remove_columns([col for col in dataset.column_names if col not in columns_to_keep])

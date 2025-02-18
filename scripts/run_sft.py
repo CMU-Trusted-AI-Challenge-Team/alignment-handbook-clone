@@ -25,6 +25,7 @@ import datasets
 import torch
 import transformers
 from transformers import AutoModelForCausalLM, set_seed
+from alexallm import AlexaLlamaForCausalLM
 
 from alignment import (
     DataArguments,
@@ -126,6 +127,8 @@ def main():
         model = AutoModelForCausalLM.from_pretrained(model_args.model_name_or_path, **model_kwargs)
         model, tokenizer = setup_chat_format(model, tokenizer)
         model_kwargs = None
+    elif 'postsft' in model_args.model_name_or_path:
+        model = AlexaLlamaForCausalLM.from_pretrained(model_args.model_name_or_path, **model_kwargs)
 
     #####################
     # Apply chat template
@@ -141,13 +144,12 @@ def main():
         remove_columns=column_names,
         desc="Applying chat template",
     )
-
     ##########################
     # Decontaminate benchmarks
     ##########################
     num_raw_train_samples = len(raw_datasets["train"])
-    raw_datasets = raw_datasets.filter(decontaminate_humaneval, batched=True, batch_size=10_000, num_proc=1)
-    num_filtered_train_samples = num_raw_train_samples - len(raw_datasets["train"])
+    # raw_datasets = raw_datasets.filter(decontaminate_humaneval, batched=True, batch_size=10_000, num_proc=1)
+    num_filtered_train_samples = num_raw_train_samples # num_raw_train_samples - len(raw_datasets["train"])
     logger.info(
         f"Decontaminated {num_filtered_train_samples} ({num_filtered_train_samples/num_raw_train_samples * 100:.2f}%) samples from the training set."
     )
@@ -164,7 +166,7 @@ def main():
     ########################
     trainer = SFTTrainer(
         model=model,
-        model_init_kwargs=model_kwargs,
+        # model_init_kwargs=model_kwargs,
         args=training_args,
         train_dataset=train_dataset,
         eval_dataset=eval_dataset,
