@@ -7,7 +7,7 @@ torch_dtype: bfloat16
 
 # Data training arguments
 dataset_mixer:
-  /data/vuln_datasets/sft.hf: 1.0
+  /data/input_sanitization/full.hf: 1.0
 
 dataset_configs:
 - all
@@ -20,8 +20,9 @@ preprocessing_num_workers: 36
 # SFT trainer config
 bf16: true
 do_eval: true
-evaluation_strategy: epoch
-gradient_accumulation_steps: 4
+evaluation_strategy: steps
+eval_steps: 200
+gradient_accumulation_steps: 1
 gradient_checkpointing: true
 gradient_checkpointing_kwargs:
   use_reentrant: false
@@ -32,14 +33,14 @@ log_level: info
 logging_steps: 5
 logging_strategy: steps
 lr_scheduler_type: cosine
-max_seq_length: 8192
+max_seq_length: 2048 # 8192
 max_steps: -1
 num_train_epochs: 2
-output_dir: /checkpoints/postsft-refiner-bandit-codeguru-sft
+output_dir: /checkpoints/postsft-input-sanitizer-wildjailbreak-tournament-retry
 overwrite_output_dir: true
-per_device_eval_batch_size: 4
-per_device_train_batch_size: 4
-push_to_hub: true
+per_device_eval_batch_size: 1
+per_device_train_batch_size: 1
+push_to_hub: false
 remove_unused_columns: true
 report_to:
 - tensorboard
@@ -49,4 +50,4 @@ save_total_limit: 3
 seed: 42
 warmup_ratio: 0.1
 dataset_text_field: "text"
-packing: true
+packing: false

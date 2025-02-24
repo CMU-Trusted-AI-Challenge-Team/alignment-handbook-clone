@@ -66,9 +66,10 @@ _deps = [
     "tensorboard",
     "torch>=2.1.2",
     "transformers>=4.39.3",
-    "trl>=0.9.6,<=0.12.0",
+    "trl==0.9.6",
     "jinja2>=3.0.0",
     "tqdm>=4.64.1",
+    "wandb"
 ]
 
 # this is a lookup table with items like:

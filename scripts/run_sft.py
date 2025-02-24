@@ -90,7 +90,7 @@ def main():
         data_args,
         splits=data_args.dataset_splits,
         configs=data_args.dataset_configs,
-        columns_to_keep=["messages", "chosen", "rejected", "prompt", "completion", "label"],
+        columns_to_keep=["messages",], # "chosen", "rejected", "prompt", "completion", "label"],
     )
     logger.info(
         f"Training on the following datasets and their proportions: {[split + ' : ' + str(dset.num_rows) for split, dset in raw_datasets.items()]}"
@@ -164,6 +164,9 @@ def main():
     ########################
     # Initialize the Trainer
     ########################
+    print(f"Length of train dataset: {len(train_dataset)}")
+    print(f"Length of eval dataset: {len(eval_dataset)}")
+
     trainer = SFTTrainer(
         model=model,
         # model_init_kwargs=model_kwargs,
@@ -173,7 +176,7 @@ def main():
         dataset_text_field="text",
         max_seq_length=training_args.max_seq_length,
         tokenizer=tokenizer,
-        packing=True,
+        # packing=False,
         peft_config=get_peft_config(model_args),
         dataset_kwargs=training_args.dataset_kwargs,
     )
