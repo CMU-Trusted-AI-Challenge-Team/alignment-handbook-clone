@@ -21,7 +21,7 @@ preprocessing_num_workers: 36
 bf16: true
 do_eval: true
 evaluation_strategy: steps
-eval_steps: 200
+eval_steps: 500
 gradient_accumulation_steps: 1
 gradient_checkpointing: true
 gradient_checkpointing_kwargs:
@@ -36,7 +36,7 @@ lr_scheduler_type: cosine
 max_seq_length: 2048 # 8192
 max_steps: -1
 num_train_epochs: 3
-output_dir: /checkpoints/postsft-input-sanitizer-wildjailbreak-tournament-codeforces/run_3e-04_2
+output_dir: /checkpoints/postsft-input-sanitizer-wildjailbreak-tournament-codeforces/run_3e-04_3
 overwrite_output_dir: true
 per_device_eval_batch_size: 1
 per_device_train_batch_size: 1
