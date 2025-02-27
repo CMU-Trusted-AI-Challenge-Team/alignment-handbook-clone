@@ -1,0 +1,46 @@
+bf16: true
+dataset_configs:
+- all
+dataset_mixer:
+  /data/new_vuln_datasets/new_refiner_sft: 1.0
+dataset_splits:
+- train
+- test
+dataset_text_field: text
+do_eval: true
+eval_steps: 100
+evaluation_strategy: steps
+gradient_accumulation_steps: 4
+gradient_checkpointing: true
+gradient_checkpointing_kwargs:
+  use_reentrant: false
+learning_rate: 0.0005
+log_level: info
+logging_steps: 5
+logging_strategy: steps
+lr_scheduler_type: cosine
+max_seq_length: 2048
+max_steps: -1
+model_name_or_path: /checkpoints/postsft-model-v2
+model_revision: main
+neftune_noise_alpha: 5.0
+num_train_epochs: 10
+output_dir: /checkpoints/postsft-refiner-codeguru-sweep/run_0.0005_10_5.0
+overwrite_output_dir: true
+packing: false
+per_device_eval_batch_size: 1
+per_device_train_batch_size: 1
+preprocessing_num_workers: 36
+push_to_hub: false
+remove_unused_columns: true
+report_to:
+- tensorboard
+- wandb
+save_steps: 200
+save_strategy: steps
+save_total_limit: 10
+seed: 42
+tokenizer_name_or_path: /checkpoints/postsft-model-v2
+torch_dtype: bfloat16
+warmup_ratio: 0.1
+weight_decay: 0.001

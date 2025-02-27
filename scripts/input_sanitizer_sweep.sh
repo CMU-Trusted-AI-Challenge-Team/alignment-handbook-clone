@@ -1,0 +1,5 @@
+sudo -E env "PATH=$PATH"  ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/deepspeed_zero3.yaml scripts/run_sft.py /home/ubuntu/training_and_learning_related/code/alignment-handbook-clone/recipes/postsft-model-v2/sft/sweeps_input_sanitizer/run_3e-04_2.yaml
+sudo -E env "PATH=$PATH"  ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/deepspeed_zero3.yaml scripts/run_sft.py /home/ubuntu/training_and_learning_related/code/alignment-handbook-clone/recipes/postsft-model-v2/sft/sweeps_input_sanitizer/run_1e-05_2.yaml
+sudo -E env "PATH=$PATH"  ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/deepspeed_zero3.yaml scripts/run_sft.py /home/ubuntu/training_and_learning_related/code/alignment-handbook-clone/recipes/postsft-model-v2/sft/sweeps_input_sanitizer/run_3e-04_3.yaml
+sudo -E env "PATH=$PATH"  ACCELERATE_LOG_LEVEL=info accelerate launch --config_file recipes/accelerate_configs/deepspeed_zero3.yaml scripts/run_sft.py /home/ubuntu/training_and_learning_related/code/alignment-handbook-clone/recipes/postsft-model-v2/sft/sweeps_input_sanitizer/run_1e-05_3.yaml
+
